@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<widget defaultlocale="en-US" id="io.cordova.myapp12a9ba" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps">
+<widget defaultlocale="en-US" id="my.io.cordova.plugins" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps">
   <name>CordovaPlugins</name>
   <description>A blank project that uses Apache Cordova to help you build an app that targets multiple mobile platforms: Android, iOS, Windows, and Windows Phone.</description>
   <author email="dev@cordova.apache.org" href="http://cordova.io">Apache Cordova Team </author>
@@ -100,12 +100,12 @@
   <plugin name="cordova-plugin-geolocation" version="2.2.0" />
   <plugin name="cordova-plugin-inappbrowser" version="1.4.0" />
   <plugin name="phonegap-plugin-push" version="1.7.4">
-    <variable name="SENDER_ID" value="123456789" />
+    <variable name="SENDER_ID" value="685922812286" />
   </plugin>
   <plugin name="cordova-plugin-network-information" version="1.2.1" />
   <plugin name="plugin.google.maps" spec="~1.3.9">
-    <variable name="API_KEY_FOR_ANDROID" value="AIzaSyCw9xjyxoCxt1uMEI74AMGmoofCKvKWTMI" />
-    <variable name="API_KEY_FOR_IOS" value="AIzaSyD_wiCBp1x0Bngp_am46YOlvcixk72IkP8" />
+    <variable name="API_KEY_FOR_ANDROID" value="AIzaSyA8f2k1cGBs-yZKj0DkUV0S-zugia5XBhM" />
+    <variable name="API_KEY_FOR_IOS" value="AIzaSyBYLz4CEu5fCzt5Zxqk1fYwgEICOK7b5QM" />
   </plugin>
   <plugin name="cordova-plugin-compat" version="1.0.0" />
 </widget>

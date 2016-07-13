@@ -24,9 +24,9 @@
 
         // Map plug-in
         // Initialize the map view
-        //var div = document.getElementById("map_canvas");
-        //map = plugin.google.maps.Map.getMap(div);
-        //map.addEventListener(plugin.google.maps.event.MAP_READY, onMapReady);
+        var div = document.getElementById("map_canvas");
+        map = plugin.google.maps.Map.getMap(div);
+        map.addEventListener(plugin.google.maps.event.MAP_READY, onMapReady);
 
 
         // Inappbrowser plug-in
@@ -61,6 +61,7 @@
         document.getElementById("countRecords").addEventListener("click", countRecords, false);
         document.getElementById("deleteRecord").addEventListener("click", deleteRecord, false);
     };
+    
 
     function prepareDB() {
         window.sqlitePlugin.openDatabase({ name: 'DemoDB', location: 'default' }, function (db) {
