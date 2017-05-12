@@ -31,15 +31,15 @@ var browserWrap,
 
 function attachNavigationEvents(element, callback) {
     var onError = function () {
-        callback({ type: "loaderror", url: this.contentWindow.location}, {keepCallback: true});
+        callback({ type: "loaderror", url: this.contentWindow.location.href}, {keepCallback: true});
     };
 
     element.addEventListener("pageshow", function () {
-        callback({ type: "loadstart", url: this.contentWindow.location}, {keepCallback: true});
+        callback({ type: "loadstart", url: this.contentWindow.location.href}, {keepCallback: true});
     });
 
     element.addEventListener("load", function () {
-        callback({ type: "loadstop", url: this.contentWindow.location}, {keepCallback: true});
+        callback({ type: "loadstop", url: this.contentWindow.location.href}, {keepCallback: true});
     });
 
     element.addEventListener("error", onError);
@@ -77,9 +77,12 @@ var IAB = {
             if (!browserWrap) {
                 browserWrap = document.createElement("div");
                 browserWrap.style.position = "absolute";
+                browserWrap.style.top = "0";
+                browserWrap.style.left = "0";
+                browserWrap.style.boxSizing = "border-box";
                 browserWrap.style.borderWidth = "40px";
-                browserWrap.style.width = "calc(100% - 80px)";
-                browserWrap.style.height = "calc(100% - 80px)";
+                browserWrap.style.width = "100vw";
+                browserWrap.style.height = "100vh";
                 browserWrap.style.borderStyle = "solid";
                 browserWrap.style.borderColor = "rgba(0,0,0,0.25)";
 
@@ -104,6 +107,7 @@ var IAB = {
 
             if (features.indexOf("location=yes") !== -1 || features.indexOf("location") === -1) {
                 popup.style.height = "calc(100% - 60px)";
+                popup.style.marginBottom = "-4px";
 
                 navigationButtonsDiv = document.createElement("div");
                 navigationButtonsDiv.style.height = "60px";

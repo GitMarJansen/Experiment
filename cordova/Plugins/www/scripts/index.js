@@ -6,6 +6,7 @@
     "use strict";
 
     var map;
+    console.clear();
 
     document.addEventListener( 'deviceready', onDeviceReady.bind( this ), false );
 
@@ -26,7 +27,11 @@
         // Initialize the map view
         var div = document.getElementById("map_canvas");
         map = plugin.google.maps.Map.getMap(div);
-        map.addEventListener(plugin.google.maps.event.MAP_READY, onMapReady);
+        map.addEventListener(plugin.google.maps.event.MAP_READY, function onMapInit(map) {
+            // The map is initialized, then show a map dialog
+            map.showDialog();
+        });
+
 
 
         // Inappbrowser plug-in
@@ -35,25 +40,25 @@
 
 
         //Device plug-in
-        console.log('Device: ' + device.platform + ' - ' + device.model + ' - ' + device.version);
-        console.log('UUID:   ' + device.uuid);
+        addToLog('Device: ' + device.platform + ' - ' + device.model + ' - ' + device.version);
+        addToLog('UUID:   ' + device.uuid);
 
         //GeoLocation plug-in
-        var options = { maximumAge: 3000, timeout: 5000, enableHighAccuracy: true };
+        var options = { maximumAge: 3000, timeout: 50000, enableHighAccuracy: true };
         navigator.geolocation.getCurrentPosition(onLocationSuccess, onLocationError, options);
 
 
         //SQLite
 
         window.sqlitePlugin.echoTest(function () {
-            console.log('EchoTest: Success');
+            addToLog('EchoTest: Success');
         }, function () {
-            console.log('EchoTest: Failure');
+            addToLog('EchoTest: Failure');
         });
         window.sqlitePlugin.selfTest(function () {
-            console.log('SelfTest: Success');
+            addToLog('SelfTest: Success');
         }, function() {
-            console.log('SelfTest: Failure');
+            addToLog('SelfTest: Failure');
         });
 
         prepareDB();
@@ -65,10 +70,10 @@
 
     function prepareDB() {
         window.sqlitePlugin.openDatabase({ name: 'DemoDB', location: 'default' }, function (db) {
-            console.log('Database opened');
+            addToLog('Database opened');
             db.transaction(function (tx) {
                 tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT,number INTEGER)', [], function () {
-                    console.log('Database created');
+                    addToLog('Database created');
                 }, sqliteErrorCB);
             }, sqliteErrorCB);
         }, sqliteErrorCB);
@@ -76,12 +81,12 @@
 
     function addRecord() {
         window.sqlitePlugin.openDatabase({ name: 'DemoDB', location: 'default' }, function (db) {
-            console.log('Database opened');
+            addToLog('Database opened');
             db.transaction(function (tx) {
                 var query = 'INSERT INTO DEMO (name, number) VALUES (?, ?)';
                 var values = ['Hilmar Jansen', 79];
                 tx.executeSql(query, values, function () {
-                    console.log('Data added');
+                    addToLog('Data added');
                 }, sqliteErrorCB);
             }, sqliteErrorCB);
         }, sqliteErrorCB);
@@ -89,13 +94,13 @@
 
     function countRecords() {
         window.sqlitePlugin.openDatabase({ name: 'DemoDB', location: 'default' }, function (db) {
-            console.log('Database opened');
+            addToLog('Database opened');
             db.transaction(function (tx) {
                 tx.executeSql('SELECT * FROM DEMO', [], function (tx, result) {
-                    console.log('retrieved data: ' + result.rows.length + ' rows');
+                    addToLog('retrieved data: ' + result.rows.length + ' rows');
                     for (var i = 0; i < result.rows.length; i++){
                         var row = result.rows.item(i);
-                        console.log('data:           ' + row.id + ' -> ' + row.name);
+                        addToLog('data:           ' + row.id + ' -> ' + row.name);
                     }
                 }, sqliteErrorCB);
             }, sqliteErrorCB);
@@ -104,13 +109,13 @@
 
     function deleteRecord() {
         window.sqlitePlugin.openDatabase({ name: 'DemoDB', location: 'default' }, function (db) {
-            console.log('Database opened');
+            addToLog('Database opened');
             db.transaction(function (tx) {
                 tx.executeSql('SELECT * FROM DEMO', [], function (tx, result) {
                     if (result.rows.length > 0) {
                         var id = result.rows.item(0).id;
                         tx.executeSql('DELETE FROM DEMO WHERE id=?', [id], function () {
-                            console.log('deleted row with id ' + id);
+                            addToLog('deleted row with id ' + id);
                         }, sqliteErrorCB);
                     }
                 }, sqliteErrorCB);
@@ -119,7 +124,7 @@
     }
 
     var onLocationSuccess = function (position) {
-        console.log('Latitude:  ' + position.coords.latitude + '\n' +
+        addToLog('Latitude:  ' + position.coords.latitude + '\n' +
               'Longitude: ' + position.coords.longitude + '\n' +
               'Altitude:  ' + position.coords.altitude + '\n' +
               'Accuracy:  ' + position.coords.accuracy + '\n' +
@@ -130,12 +135,15 @@
     };
 
     function onLocationError(error) {
-        console.log('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
+        addToLog('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
     }
 
+    function addToLog(text) {
+        document.getElementById("log").innerText = text + "\n" + document.getElementById("log").innerText;
+    }
 
     function onMapReady() {
-        var button = document.getElementById("button");
+        var button = document.getElementById("fullScreen");
         button.addEventListener("click", onBtnClicked, false);
     }
 
@@ -156,16 +164,16 @@
         states[Connection.CELL] = 'Cell generic connection';
         states[Connection.NONE] = 'No network connection';
 
-        console.log('Connection type: ' + states[networkState]);
+        addToLog('Connection type: ' + states[networkState]);
 
     }
 
     function offline(ev) {
-        console.log('Network off-line');
+        addToLog('Network off-line');
     }
 
     function online(ev) {
-        console.log('Network on-line');
+        addToLog('Network on-line');
     }
 
 

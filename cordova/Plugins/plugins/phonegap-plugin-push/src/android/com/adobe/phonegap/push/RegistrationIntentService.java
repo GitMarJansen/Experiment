@@ -13,7 +13,7 @@ import com.google.android.gms.iid.InstanceID;
 import java.io.IOException;
 
 public class RegistrationIntentService extends IntentService implements PushConstants {
-    public static final String LOG_TAG = "PushPlugin_RegistrationIntentService";
+    public static final String LOG_TAG = "Push_RegistrationIntent";
 
     public RegistrationIntentService() {
         super(LOG_TAG);
@@ -28,12 +28,8 @@ public class RegistrationIntentService extends IntentService implements PushCons
             String senderID = sharedPreferences.getString(SENDER_ID, "");
             String token = instanceID.getToken(senderID,
                     GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
+            PushPlugin.setRegistrationID(token);
             Log.i(LOG_TAG, "new GCM Registration Token: " + token);
-
-            // save new token
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString(REGISTRATION_ID, token);
-            editor.commit();
 
         } catch (Exception e) {
             Log.d(LOG_TAG, "Failed to complete token refresh", e);

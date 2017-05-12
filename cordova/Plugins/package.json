@@ -3,5 +3,32 @@
     "version": "1.0.0",
     "private": true,
     "dependencies": {
+        "cordova-plugin-compat": "1.0.0",
+        "cordova-plugin-device": "~1.1.6",
+        "cordova-plugin-geolocation": "~2.4.3",
+        "cordova-plugin-inappbrowser": "~1.7.1",
+        "cordova-plugin-network-information": "~1.3.3",
+        "cordova-plugin-whitelist": "~1.3.2",
+        "cordova-sqlite-storage": "~2.0.4",
+        "phonegap-plugin-push": "~2.0.0-rc3",
+        "plugin.google.maps": "~1.3.9"
+    },
+    "cordova": {
+        "plugins": {
+            "cordova-plugin-compat": {},
+            "cordova-plugin-device": {},
+            "cordova-plugin-geolocation": {},
+            "cordova-plugin-inappbrowser": {},
+            "cordova-plugin-network-information": {},
+            "cordova-plugin-whitelist": {},
+            "cordova-sqlite-storage": {},
+            "phonegap-plugin-push": {
+                "SENDER_ID": "685922812286"
+            },
+            "plugin.google.maps": {
+                "API_KEY_FOR_ANDROID": "AIzaSyA8f2k1cGBs-yZKj0DkUV0S-zugia5XBhM",
+                "API_KEY_FOR_IOS": "AIzaSyBYLz4CEu5fCzt5Zxqk1fYwgEICOK7b5QM"
+            }
+        }
     }
 }

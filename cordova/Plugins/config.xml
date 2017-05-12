@@ -8,8 +8,7 @@
   <access origin="http://maps.google.com" />
   <vs:features />
   <preference name="SplashScreen" value="screen" />
-  <preference name="windows-target-version" value="8.1" />
-  <plugin name="cordova-plugin-whitelist" version="1" />
+  <preference name="windows-target-version" value="10.0" />
   <allow-intent href="http://*/*" />
   <allow-intent href="https://*/*" />
   <allow-intent href="tel:*" />
@@ -95,17 +94,22 @@
   <platform name="wp8">
     <splash height="1280" src="res/screens/wp8/SplashScreenImage.png" width="768" />
   </platform>
-  <plugin name="cordova-sqlite-storage" version="1.4.5" />
-  <plugin name="cordova-plugin-device" version="1.1.2" />
-  <plugin name="cordova-plugin-geolocation" version="2.2.0" />
-  <plugin name="cordova-plugin-inappbrowser" version="1.4.0" />
-  <plugin name="phonegap-plugin-push" version="1.7.4">
+  <plugin name="cordova-plugin-compat" spec="1.0.0" />
+  <plugin name="cordova-plugin-device" spec="~1.1.6" />
+  <plugin name="cordova-plugin-geolocation" spec="~2.4.3" />
+  <plugin name="cordova-plugin-inappbrowser" spec="~1.7.1" />
+  <plugin name="cordova-plugin-network-information" spec="~1.3.3" />
+  <plugin name="cordova-plugin-whitelist" spec="~1.3.2" />
+  <plugin name="cordova-sqlite-storage" spec="~2.0.4" />
+  <plugin name="phonegap-plugin-push" spec="~2.0.0-rc3">
     <variable name="SENDER_ID" value="685922812286" />
   </plugin>
-  <plugin name="cordova-plugin-network-information" version="1.2.1" />
   <plugin name="plugin.google.maps" spec="~1.3.9">
     <variable name="API_KEY_FOR_ANDROID" value="AIzaSyA8f2k1cGBs-yZKj0DkUV0S-zugia5XBhM" />
     <variable name="API_KEY_FOR_IOS" value="AIzaSyBYLz4CEu5fCzt5Zxqk1fYwgEICOK7b5QM" />
   </plugin>
-  <plugin name="cordova-plugin-compat" version="1.0.0" />
+  <vs:toolsetVersion>6.3.1</vs:toolsetVersion>
+  <engine name="android" spec="5.2.1" />
+  <engine name="ios" spec="4.2.0" />
+  <engine name="windows" spec="4.4.2" />
 </widget>
