@@ -1,0 +1,51 @@
+﻿<Window x:Class="SystrayMonitor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:taskbar="http://www.hardcodet.net/taskbar"
+        xmlns:converters="clr-namespace:SystrayMonitor.Converters"
+        mc:Ignorable="d"
+        ShowInTaskbar="False"
+        ResizeMode="CanResizeWithGrip"
+        WindowStyle="ToolWindow"
+        FontFamily="Segoe UI"
+        FontSize="12"
+        Visibility="Hidden"
+        Title="MainWindow"
+        Height="350"
+        Width="525">
+    <Window.Resources>
+        <ResourceDictionary>
+            <converters:StatusToColorConverter x:Key="StatusToColorConverter" />
+
+            <DataTemplate x:Key="DataTemplate1">
+                <TextBlock Text="{Binding Url}"
+                           FontSize="10"
+                           TextWrapping="NoWrap"
+                           Foreground="{Binding Okay, Converter={StaticResource StatusToColorConverter}}" />
+            </DataTemplate>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <taskbar:TaskbarIcon x:Name="tbIcon"
+                             ToolTipText="Status monitor"
+                             LeftClickCommand="{Binding ShowWindow}"
+                             DoubleClickCommand="{Binding RunNow}">
+            <taskbar:TaskbarIcon.TrayToolTip>
+                <Border Background="White"
+                        BorderBrush="Orange"
+                        BorderThickness="2"
+                        CornerRadius="4"
+                        Padding="5"
+                        Opacity="0.8">
+                    <TextBlock Text="{Binding Tooltip}"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                </Border>
+            </taskbar:TaskbarIcon.TrayToolTip>
+        </taskbar:TaskbarIcon>
+        <ListBox ItemsSource="{Binding Sites}"
+                 ItemTemplate="{DynamicResource DataTemplate1}" />
+    </Grid>
+</Window>
